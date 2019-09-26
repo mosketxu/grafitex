@@ -17,6 +17,7 @@ class CreateCampaignsTable extends Migration
             $table->bigIncrements('id');
             $table->string('campaign');
             $table->date('campaign_date');
+            $table->integer('campaign_state')->default(0);
             $table->string('slug');
             $table->softDeletes();
             $table->timestamps();

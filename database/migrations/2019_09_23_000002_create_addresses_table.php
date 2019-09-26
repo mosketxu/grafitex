@@ -16,6 +16,8 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->unsignedInteger('id'); /* sap code*/
             $table->primary('id');
+            $table->unsignedInteger('store_id');
+            $table->foreign('store_id')->references('id')->on('stores');
             $table->integer('address_totstore');
             $table->string('address_countrycode',2);
             $table->string('address_channel');
@@ -28,6 +30,7 @@ class CreateAddressesTable extends Migration
             $table->string('address_phone');
             $table->string('address_email');
             $table->string('address_storeconcept');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class CreateElementsTable extends Migration
             $table->string('element_material');
             $table->string('element_unit_x_prop');
             $table->decimal('element_price');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

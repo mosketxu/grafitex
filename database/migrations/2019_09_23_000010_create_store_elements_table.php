@@ -19,6 +19,7 @@ class CreateStoreElementsTable extends Migration
             $table->foreign('element_id')->references('id')->on('elements');
             $table->unsignedInteger('store_id');
             $table->foreign('store_id')->references('id')->on('stores');
+            $table->integer('quantity')->default(1);
             $table->timestamps();
         });
     }

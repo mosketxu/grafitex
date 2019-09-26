@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
-use App\Store;
 use Illuminate\Http\Request;
+use App\Store;
 
-class CampaignController extends Controller
+class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,11 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::with('stores')
-            ->paginate(3);
-        return view('campaign.index', compact('campaigns'));
+        $stores=Store::orderBy('id','asc')
+        ->paginate(10);
+
+        return view('store.index',compact('stores'));
+
     }
 
     /**
@@ -27,8 +28,7 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        $stores=Store::all();
-        return view('campaign.create',compact('stores'));
+        //
     }
 
     /**
@@ -39,17 +39,7 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        $campaign = Campaign::create($request->all());
-
-        $stores = $request->input('stores', []);
-        $quantities = $request->input('quantities', []);
-        for ($store=0; $store < count($stores); $store++) {
-            if ($stores[$store] != '') {
-                $campaign->stores()->attach($stores[$store], ['quantity' => $quantities[$store]]);
-            }
-        }
-    
-        return redirect()->route('orders.index');
+        //
     }
 
     /**

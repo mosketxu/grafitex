@@ -11,10 +11,25 @@
 |
 */
 
+Auth::routes([
+    'register' => false,
+]);
+
+// Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    
+    Route::resource('user', 'UserController');//->middleware('admin');
+    
+    Route::resource('campaign', 'CampaignController');//->middleware('admin');
+    
+    Route::resource('store', 'StoreController');//->middleware('admin');
+    
+    Route::resource('element', 'ElementController');//->middleware('admin');
+});

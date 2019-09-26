@@ -21,8 +21,7 @@ class CreateStoresTable extends Migration
             $table->string('store_area');
             $table->string('store_segment');
             $table->string('store_concept');
-            $table->unsignedInteger('address_id');
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
