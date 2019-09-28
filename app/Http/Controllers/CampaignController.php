@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\{Campaign, CampaignStore, Store};
-// use App\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,8 +16,9 @@ class CampaignController extends Controller
     public function index()
     {
         $stores=Store::all();
-        $campaigns = Campaign::with('stores')
-            ->paginate(15);
+        $campaigns = Campaign::with('CampaignStore')
+            ->orderBy('id','desc')
+            ->paginate(10);
         return view('campaign.index', compact('campaigns','stores'));
     }
 
@@ -29,8 +29,7 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        $stores=Store::all();
-        return view('campaign.create',compact('stores'));
+        //
     }
 
     /**
@@ -50,12 +49,13 @@ class CampaignController extends Controller
         if($campaignstores = $request->campaign_storeId){
             while ($campaignstores && $cont  < count($campaignstores)) {
                 $campaignstore = new CampaignStore();
+                $campaignstore->campaign_id=$campaign->id;
                 $campaignstore->store_id = $campaignstores[$cont];
                 $campaignstore->save();
                 $cont = $cont + 1;
             }
         }
-        
+
         return redirect()->route('campaign.index');
     }
 

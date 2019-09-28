@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-auto mr-auto">
                     {{-- <a  href="{{route('campaign.create') }}" role="button"><i class="fas fa-plus-circle fa-lg text-primary"></i></a> --}}
-                    <a  href="" role="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus-circle fa-lg text-primary"></i></a>
+                    <a  href="" role="button" data-toggle="modal" data-target="#campaignCreateModal"><i class="fas fa-plus-circle fa-lg text-primary"></i></a>
                 </div>
 
                 <div class="col-auto">
@@ -38,7 +38,6 @@
                         <th>Campaña</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Fin Prevista</th>
-                        <th>Slug</th>
                         <th>Creada el:</th>
                         <th>Modificada el:</th>
                         <th class="text-right">Est. &nbsp; &nbsp;  &nbsp; Op. &nbsp; &nbsp; </th>
@@ -51,23 +50,21 @@
                         <td>{{$campaign->campaign_name ?? '' }}</td>
                         <td>{{$campaign->campaign_initdate ?? '' }}</td>
                         <td>{{$campaign->campaign_enddate ?? '' }}</td>
-                        <td>{{$campaign->slug ?? '' }}</td>
                         <td>{{$campaign->created_at ?? '' }}</td>
                         <td>{{$campaign->updated_at ?? '' }}</td> 
 
                         <td class="text-right">
-                                @if($campaign->campaign_state===0)
-                                    <i class="fas fa-circle text-primary fa-xs"></i>
-                                @elseif($campaign->campaign_state===1)
-                                    <i class="fas fa-circle text-warning fa-xs"></i>
-                                @else
-                                    <i class="fas fa-circle text-success fa-xs"></i>
-                                @endif
-                                &nbsp; &nbsp;
-                                <a href="{{route('campaign.show',$campaign->slug) }}" title="Show"><i class="far fa-eye text-success"></i></a>
-                                <a href="{{route('campaign.edit',$campaign->slug) }}"  title="Edit"><i class="far fa-edit text-primary"></i></a>
-                                <a href="{{route('campaign.destroy',$campaign->id)}}" title="Delete"><i class="far fa-trash-alt text-danger"></i></a>
-                                </td>
+                            @if($campaign->campaign_state===0)
+                                <i class="fas fa-circle text-primary fa-xs"></i>
+                            @elseif($campaign->campaign_state===1)
+                                <i class="fas fa-circle text-warning fa-xs"></i>
+                            @else
+                                <i class="fas fa-circle text-success fa-xs"></i>
+                            @endif
+                            &nbsp; &nbsp;
+                            <a href="{{route('campaign.show',$campaign->slug) }}" title="Show"><i class="far fa-eye text-success"></i></a>
+                            <a href="{{route('campaign.edit',$campaign->slug) }}"  title="Edit"><i class="far fa-edit text-primary"></i></a>
+                            <a href="{{route('campaign.destroy',$campaign->id)}}" title="Delete"><i class="far fa-trash-alt text-danger"></i></a>
                         <td>
                     </tr>
                 @endforeach

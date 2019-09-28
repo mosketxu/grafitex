@@ -12,11 +12,6 @@ class Campaign extends Model
     protected $fillable=['campaign_name','campaign_initdate','campaign_enddate','campaign_state','slug'];
     protected $dates = ['deleted_at'];
 
-    // public function campaigndetails()
-    // {
-    //     return $this->hasMany(CampaignDetail::class);
-    // }
-
     public static function boot()
     {
         parent::boot();
@@ -30,7 +25,7 @@ class Campaign extends Model
          });
     }
 
-    public function stores(){
-        return $this->belongsToMany(Store::class)->withPivot(['quantity']);
+    public function campaignStore(){
+        return $this->hasMany(CampaignStore::class);
     }
 }

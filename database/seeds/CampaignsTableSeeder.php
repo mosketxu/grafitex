@@ -15,36 +15,16 @@ class CampaignsTableSeeder extends Seeder
         factory(\App\Campaign::class, 2)->create()
         ->each(function(\App\Campaign $b){
             for ($i=0; $i < 5; $i++) {
-                \DB::table('campaign_store')->insert(array(
+                \DB::table('campaign_stores')->insert(array(
                     'store_id'=>\App\Store::all()->random()->id,
                     'campaign_id'=>$b->id
                 ));
             }
         });
-
-        factory(\App\Campaign::class, 1)->create()
-        ->each(function(\App\Campaign $b){
-            for ($i=0; $i < 3; $i++) {
-                \DB::table('campaign_store')->insert(array(
-                    'store_id'=>\App\Store::all()->random()->id,
-                    'campaign_id'=>$b->id
-                ));
-            }
-        });        
 
         factory(\App\Campaign::class, 3)->create()
         ->each(function(\App\Campaign $b){
-            for ($i=0; $i < 8; $i++) {
-                \DB::table('campaign_store')->insert(array(
-                    'store_id'=>\App\Store::all()->random()->id,
-                    'campaign_id'=>$b->id
-                ));
-            }
+            factory(\App\CampaignStore::class,6)->create(['campaign_id'=>$b->id]);
         });
-
-        // factory(\App\Campaign::class, 3)->create()
-        // ->each(function(\App\Campaign $b){
-        //     factory(\App\CampaignStore::class,6)->create(['campaign_id'=>$b->id]);
-        // });
     }
 }

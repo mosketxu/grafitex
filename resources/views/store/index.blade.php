@@ -1,6 +1,6 @@
 @extends('layouts.grafitex')
 @section('ruta','Stores')
-@section('title','Listado de Stores')
+@section('title','Grafitex-Stores')
 
 @section('content')
     <div id="content-app">
@@ -16,7 +16,8 @@
                         </div>
                     @endif
                     <!-- tabla store -->
-                    @include('store._storetable')
+                    @include('store._storeIndexList')
+                    @include('store._storeCreateModal')
                 </div>
             </div>
         </div>

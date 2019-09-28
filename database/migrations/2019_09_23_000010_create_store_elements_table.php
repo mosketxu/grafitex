@@ -15,11 +15,10 @@ class CreateStoreElementsTable extends Migration
     {
         Schema::create('store_elements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('element_id');
-            $table->foreign('element_id')->references('id')->on('elements');
             $table->unsignedInteger('store_id');
             $table->foreign('store_id')->references('id')->on('stores');
-            $table->integer('quantity')->default(1);
+            $table->unsignedBigInteger('element_id');
+            $table->foreign('element_id')->references('id')->on('elements');
             $table->timestamps();
         });
     }

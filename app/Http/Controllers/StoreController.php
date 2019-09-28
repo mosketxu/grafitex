@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\{Element, Store, StoreElement};
 use Illuminate\Http\Request;
-use App\Store;
+
 
 class StoreController extends Controller
 {
@@ -14,11 +15,11 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores=Store::orderBy('id','asc')
-        ->paginate(10);
-
-        return view('store.index',compact('stores'));
-
+        $elementos=Element::all();
+        $stores=Store::with('StoreElement')
+            ->orderBy('id','asc')
+            ->paginate(10);
+        return view('store.index',compact('stores','elementos'));
     }
 
     /**
@@ -39,7 +40,21 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = Store::create($request->all());
+
+        $cont = 0;
+        
+        if($storeelements = $request->store_elementoId){
+            while ($storeelements && $cont  < count($storeelements)) {
+                $storeelement = new StoreElement();
+                $storeelement->store_id=$request->id;
+                $storeelement->element_id = $storeelements[$cont];
+                $storeelement->save();
+                $cont = $cont + 1;
+            }
+        }
+
+        return redirect()->route('store.index');
     }
 
     /**

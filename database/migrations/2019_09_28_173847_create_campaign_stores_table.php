@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCampaignStoreTable extends Migration
+class CreateCampaignStoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateCampaignStoreTable extends Migration
      */
     public function up()
     {
-        Schema::create('campaign_store', function (Blueprint $table) {
-            // $table->bigIncrements('id');
+        Schema::create('campaign_stores', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('campaign_id');
             $table->foreign('campaign_id')->references('id')->on('campaigns');
-            $table->unsignedInteger('store_id');
-            $table->foreign('store_id')->references('id')->on('stores');
-            $table->integer('quantity')->default(1);
+            $table->integer('store_id');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateCampaignStoreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campaign_store');
+        Schema::dropIfExists('campaign_stores');
     }
 }

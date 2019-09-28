@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    Campaña
+                    Campañas
                 </div>
                 <div class="card-body">
                     @if (session('status'))
