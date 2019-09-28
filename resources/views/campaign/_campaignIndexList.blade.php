@@ -3,11 +3,13 @@
         <div class="row">
                 <div class="col-auto ">
                     <i class="fas fa-fw fa-address-card"></i>
-                    Listado Campañas
+                    Campañas
                 </div>
                 <div class="col-auto mr-auto">
-                    <a  href="{{route('campaign.create') }}" role="button"><i class="fas fa-plus-circle fa-lg text-primary"></i></a>
+                    {{-- <a  href="{{route('campaign.create') }}" role="button"><i class="fas fa-plus-circle fa-lg text-primary"></i></a> --}}
+                    <a  href="" role="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus-circle fa-lg text-primary"></i></a>
                 </div>
+
                 <div class="col-auto">
                     <form method="GET" action="{{route('campaign.index') }}">
                         <div class="input-group input-group-sm">
@@ -34,7 +36,9 @@
                     <tr>
                         <th>#</th>
                         <th>Campaña</th>
-                        <th>Fecha Campaña</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin Prevista</th>
+                        <th>Slug</th>
                         <th>Creada el:</th>
                         <th>Modificada el:</th>
                         <th class="text-right">Est. &nbsp; &nbsp;  &nbsp; Op. &nbsp; &nbsp; </th>
@@ -44,8 +48,10 @@
                 @foreach ($campaigns as $campaign)
                     <tr data-entry-id="{{ $campaign->id }}">
                         <td>{{$campaign->id ?? '' }}</td>
-                        <td>{{$campaign->campaign ?? '' }}</td>
-                        <td>{{$campaign->campaign_date ?? '' }}</td>
+                        <td>{{$campaign->campaign_name ?? '' }}</td>
+                        <td>{{$campaign->campaign_initdate ?? '' }}</td>
+                        <td>{{$campaign->campaign_enddate ?? '' }}</td>
+                        <td>{{$campaign->slug ?? '' }}</td>
                         <td>{{$campaign->created_at ?? '' }}</td>
                         <td>{{$campaign->updated_at ?? '' }}</td> 
 

@@ -1,52 +1,63 @@
-<form action="{{ route("campaign.store") }}" method="POST">
-    @csrf
-
-    {{-- ... customer name and email fields --}}
-
-    <div class="card">
-        <div class="card-header">
-            Stores
-            <label for="campaign_date">Fecha Campaña</label>
-            <input type="date" name="campaign_date" class="form-control"/>
-        </div>
-
-        <div class="card-body">
-            <table class="table" id="products_table">
-                <thead>
-                    <tr>
-                        <th>Store</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id="store0">
-                        <td>
-                            <select name="stores[]" class="form-control">
-                                <option value="">-- choose product --</option>
-                                @foreach ($stores as $store)
-                                    <option value="{{ $store->id }}">
-                                        {{ $store->store_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <input type="number" name="quantities[]" class="form-control" value="1" />
-                        </td>
-                    </tr>
-                    <tr id="store1"></tr>
-                </tbody>
-            </table>
-
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-auto ">
+                <i class="fas fa-address-card"></i>
+                @yield('title')
+            </div>
+            <div class="col-auto mr-auto">
+                
+            </div>
+            <div class="col-auto">
+                
+            </div>
+        </div>    
+    </div>
+    <div class="card-body">
+        {{-- @include('partials._errores') --}}
+        <form  method="POST" action="{{ route("campaign.store") }}">
+            @csrf
             <div class="row">
-                <div class="col-md-12">
-                    <button id="add_row" class="btn btn-default pull-left">+ Add Row</button>
-                    <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
+                <div class="form-group col">
+                    <label for="campaign_name">Campaña</label>
+                    <input type="text" class="form-control form-control-sm" id="campaign_name" name="campaign_name" value="{{ old('campaign_name') }}" />
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label for="campaign_initdate">Fecha Inicio</label>
+                    <input type="date" class="form-control form-control-sm" id="campaign_initdate" name="campaign_initdate" value="{{ old('campaign_initdate') }}"/>
+                </div>
+                <div class="form-group col">
+                    <label for="campaign_enddate">Fecha Finalización</label>
+                    <input type="date" class="form-control form-control-sm" id="campaign_enddate" name="campaign_enddate" value="{{ old('campaign_enddate') }}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group input-group-sm mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-fw fa-user-plus text-primary"></i></span>
+                    </div>
+                    <select id="listastores" data-placeholder="Stores..." class="form-control select2"  multiple  name="campaign_storeId[]">
+                        @foreach ($stores as $store )
+                            <option value="{{$store->id}}">{{$store->id}} {{$store->store_name}}</option>                                
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+            <input type="button" class="btn btn-primary" name="Enviar" value="Enviar" onclick="form.submit()">
+        </form>
     </div>
-    <div>
-        <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
-    </div>
-</form>
+</div>
+
+@push('scriptchosen')
+    <script>
+        $(document).ready(function() {
+        
+        $('.select2').select2({
+            placeholder: 'Stores de la campaña'
+            });
+        });
+    </script>
+@endpush

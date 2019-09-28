@@ -3,7 +3,7 @@
 @section('title','Crea una campaña')
 
 @section('content')
-    <div id="content-wrapper">
+    <div id="content-app">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
@@ -33,17 +33,17 @@
         $(document).ready(function(){
             let row_number = 1;
             $("#add_row").click(function(e){
-            e.preventDefault();
-            let new_row_number = row_number - 1;
-            $('#product' + row_number).html($('#product' + new_row_number).html()).find('td:first-child');
-            $('#products_table').append('');
-            row_number++;
+                e.preventDefault();
+                let new_row_number = row_number - 1;
+                $('#store' + row_number).html($('#store' + new_row_number).html()).find('td:first-child');
+                $('#stores_table').append('');
+                row_number++;
             });
         
             $("#delete_row").click(function(e){
             e.preventDefault();
             if(row_number > 1){
-                $("#product" + (row_number - 1)).html('');
+                $("#store" + (row_number - 1)).html('');
                 row_number--;
             }
             });

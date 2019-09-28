@@ -1,9 +1,9 @@
 @extends('layouts.grafitex')
 @section('ruta','Stores')
-@section('title','Crea una campaña')
+@section('title','Grafitex-Campañas')
 
 @section('content')
-    <div id="content-wrapper">
+    <div id="content-app">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
@@ -17,6 +17,7 @@
                     @endif
                     <!-- tabla store -->
                     @include('campaign._campaignIndexList')
+                    @include('campaign._campaignCreateModal')
                 </div>
             </div>
         </div>

@@ -10,8 +10,9 @@ $factory->define(Campaign::class, function (Faker $faker) {
     $camp=$faker->sentence(2);
     $slug=Str::slug($camp);
     return [
-        'campaign'=>$camp,
-        'campaign_date'=>$faker->date(),
+        'campaign_name'=>$camp,
+        'campaign_initdate'=>$faker->date(),
+        'campaign_enddate'=>$faker->date(),
         'slug' =>$slug,
     ];
 });

@@ -3,7 +3,7 @@
 @section('title','Listado de Stores')
 
 @section('content')
-    <div id="content-wrapper">
+    <div id="content-app">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
