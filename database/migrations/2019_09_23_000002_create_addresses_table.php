@@ -14,10 +14,8 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->unsignedInteger('id'); /* sap code*/
-            $table->primary('id');
-            $table->unsignedInteger('store_id');
-            $table->foreign('store_id')->references('id')->on('stores');
+            $table->bigIncrements('id');
+            $table->integer('store_id');
             $table->integer('address_totstore');
             $table->string('address_countrycode',2);
             $table->string('address_channel');

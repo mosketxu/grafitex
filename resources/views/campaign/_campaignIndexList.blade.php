@@ -62,8 +62,8 @@
                                 <i class="fas fa-circle text-success fa-xs"></i>
                             @endif
                             &nbsp; &nbsp;
-                            <a href="{{route('campaign.show',$campaign->slug) }}" title="Show"><i class="far fa-eye text-success"></i></a>
-                            <a href="{{route('campaign.edit',$campaign->slug) }}"  title="Edit"><i class="far fa-edit text-primary"></i></a>
+                            <a href="{{route('campaign.show',$campaign->id) }}" title="Show"><i class="far fa-eye text-success"></i></a>
+                            <a href="{{route('campaign.edit',$campaign->id) }}"  title="Edit"><i class="far fa-edit text-primary"></i></a>
                             <a href="{{route('campaign.destroy',$campaign->id)}}" title="Delete"><i class="far fa-trash-alt text-danger"></i></a>
                         <td>
                     </tr>

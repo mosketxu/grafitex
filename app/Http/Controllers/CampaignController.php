@@ -78,7 +78,16 @@ class CampaignController extends Controller
      */
     public function edit($id)
     {
-        //
+        $campaignEdit = Campaign::find($id);
+
+        $storesDisponibles = Store::whereNotIn('id', function ($query) use ($id) {
+            $query->select('store_id')->from('campaign_stores')->where('campaign_id', '=', $id);
+            })->get();
+        $storesAsociadas = Store::whereIn('id', function ($query) use ($id) {
+            $query->select('store_id')->from('campaign_stores')->where('campaign_id', '=', $id);
+        })->get();
+
+        return view('campaign.edit', compact('campaignEdit', 'storesDisponibles', 'storesAsociadas'));
     }
 
     /**

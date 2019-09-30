@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\{Address, Store};
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -13,7 +14,10 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $stores=Store::all()->sortBy('id');
+        $addresses=Address::orderBy('address_address')
+        ->paginate(15);
+        return view('address.index',compact('addresses','stores'));
     }
 
     /**
@@ -34,7 +38,12 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $addresses = Address::create($request->all());
+
+        $cont = 0;
+
+        return redirect()->route('store.index');
     }
 
     /**
