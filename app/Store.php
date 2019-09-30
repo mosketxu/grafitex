@@ -25,5 +25,4 @@ class Store extends Model
     public function storeElement(){
         return $this->hasMany(StoreElement::class);
     }
-
 }

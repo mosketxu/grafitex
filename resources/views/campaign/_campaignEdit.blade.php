@@ -32,7 +32,7 @@
                     </div>    
                     <div class="card">
                         <div class="card-header">
-                            Detalles de la campaña:
+                            Stores
                             <span id="campaignid" class="d-none">{{ $campaignEdit->id }}</span>
 
                         </div>
@@ -40,11 +40,13 @@
                             <div class="row">
                                 {{-- Store Asociados --}}
                                 <div class="col-sm-6">
+                                    <h6>Asociadas</h6>
                                     <div class="table-responsive">
                                         <table class="table table-hover table-sm small" id="tablaAsociadas" cellspacing="0" width=100%>
                                             <thead>
                                                 <tr>
-                                                    <th>Asociadas</th>
+                                                    <th>Store</th>
+                                                    <th>Store Name</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -61,12 +63,14 @@
                                 </div>
                                 {{-- Stores Disponibles --}}
                                 <div class="col-sm-6">
-                                    <div class="table-responsive">
+                                    <h6>Disponibles</h6>
+                                        <div class="table-responsive">
                                         <table class="table table-hover table-sm small" id="tablaDisponibles"cellspacing="0" width=100%>
                                             <thead>
                                                 <tr>
                                                     <th></th>
-                                                    <th>Disponibles</th>
+                                                    <th>Store</th>
+                                                    <th>Store name</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tStoDisp" class="text-muted buscar">

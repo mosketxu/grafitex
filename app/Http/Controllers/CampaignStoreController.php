@@ -13,15 +13,12 @@ class CampaignStoreController extends Controller
 
     public function stoAsoc($campaignid)
     {
-        $stoAsoc=CampaignStore::where('campaign_id',$campaignid)->get();
+        // $stoAsoc=CampaignStore::where('campaign_id',$campaignid)->get();
 
-        $stoAsoc=CampaignStore::
-        join('stores','stores.id',"=","store_id")
+        $stoAsoc=CampaignStore::join('stores','stores.id',"=","store_id")
+        ->select('campaign_stores.id as campStoId','stores.id', 'stores.store_name')
         ->where('campaign_id',$campaignid)->get();
-        // $data = User::select('users.nameUser', 'categories.nameCategory')
-        //         ->join('categories', 'users.idUser', '=', 'categories.user_id')
-        //         ->get();
-     
+
         return response()->json(
             $stoAsoc->toArray()
         );
@@ -68,7 +65,21 @@ class CampaignStoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $camStoId=DB::table('campaign_stores')->insertGetId([
+            'campaign_id' => $request->campaignId,
+            'store_id' =>  $request->storeId
+        ]);
+
+        $store = DB::table('stores')
+            ->where('id', $request->storeId)
+            ->first();
+
+        return response()->json([
+            'campaignstoreId' => $camStoId,
+            'campaignId' => $request->campaignId,
+            'store' => $store,
+
+        ]);
     }
 
     /**
@@ -111,8 +122,28 @@ class CampaignStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
-    }
-}
+        if ($request->ajax()) {
+            // $empresa = UserEmpresa::findOrFail($request->userEmpId);
+            $sto =  DB::table('stores')
+                ->where('id', $request->stoId)
+                ->first();
+
+            // $empresa = UserEmpresa::where('empresa_id', $request->empresa_id)->where('user_id', $request->user_id)->delete();
+            $store = DB::table('campaign_stores')
+                ->where('campaign_id', $request->campId)
+                ->where('store_id', $request->stoId)
+                ->delete();
+
+            $a=Store::first()->store_name;
+
+            return response()->json(
+                [
+                    'storename'=>$sto->store_name,
+                    'campId' => $request->campId,
+                    'campStoId' => $request->campstoId,
+                ]
+            );
+        }
+    }}
